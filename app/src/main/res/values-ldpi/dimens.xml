@@ -1,0 +1,19 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Activity advance-->
+    <dimen name="text_advance">15sp</dimen>
+    <dimen name="max_area_btn">250dp</dimen>
+    <dimen name="circle">120dp</dimen>
+    <dimen name="margin_top_circle">10dip</dimen>
+
+    <!-- Activity Pick Up -->
+    <dimen name="pickup_text">100dp</dimen>
+
+    <dimen name="text_request">19sp</dimen>
+    <dimen name="text_fee">24sp</dimen>
+    <dimen name="text_howmany">14sp</dimen>
+    <dimen name="text_btn">19sp</dimen>
+</resources>

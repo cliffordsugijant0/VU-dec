@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="node8.valetuncle.HistoryDetailActivity">
+
+
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/top_bar_text"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:id="@+id/top_bar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="458dp"
+        android:layout_below="@+id/top_bar"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="11dp"
+        android:background="#FFFFFF"
+        android:id="@+id/relativeLayout">
+
+        <TextView
+            android:text="Marina Bay Sands #22, Singapore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/pickup"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:layout_marginTop="23dp"
+            android:layout_below="@+id/textView8"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal" />
+
+        <TextView
+            android:text="Saturday, 20th Aug 20:06 AM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/datePickup"
+            android:textStyle="normal|bold"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/pickup"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="7dp" />
+
+        <ImageView
+            android:src="@drawable/green_dot"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_below="@+id/datePickup"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:id="@+id/imageView" />
+
+        <ImageView
+            android:src="@drawable/red_dot"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:id="@+id/imageView5"
+            android:layout_below="@+id/imageView4"
+            android:layout_marginTop="20dp"
+            android:layout_alignLeft="@+id/imageView"
+            android:layout_alignStart="@+id/imageView" />
+
+        <ImageView
+            android:src="@drawable/green_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:id="@+id/imageView4"
+            android:layout_below="@+id/imageView"
+            android:layout_marginTop="20dp"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:text="Outram Park, Singapore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/goalAddress"
+            android:textColor="@android:color/black"
+            android:textStyle="bold"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/imageView5"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="5dp" />
+
+        <TextView
+            android:text="Saturday, 20th Aug 20:06 AM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dateGoal"
+            android:textStyle="normal|bold"
+            android:gravity="center_horizontal"
+            android:layout_below="@+id/goalAddress"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginTop="5dp" />
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginBottom="20dp"
+            android:background="@android:color/holo_green_dark"
+            android:layout_above="@+id/feeTV"/>
+
+
+        <TextView
+            android:text="$38"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/feeTV"
+            android:textColor="#9d0505"
+            android:textStyle="normal|bold"
+            android:layout_marginBottom="11dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginRight="14dp"
+            android:layout_marginEnd="14dp"
+            android:textSize="36sp" />
+
+        <TextView
+            android:text="Total Fare"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/textView30"
+            android:textColor="@android:color/black"
+            android:textStyle="normal|bold"
+            android:layout_alignBaseline="@+id/feeTV"
+            android:layout_alignBottom="@+id/feeTV"
+            android:layout_alignLeft="@+id/imageView4"
+            android:layout_alignStart="@+id/imageView4"
+            android:textAllCaps="true" />
+
+    </RelativeLayout>
+</RelativeLayout>

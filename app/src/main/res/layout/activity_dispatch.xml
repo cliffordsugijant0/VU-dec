@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="node8.valetuncle.DispatchActivity"
+    android:background="@color/colorBG">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/imageView7"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/vu_logo"
+        android:layout_marginTop="40dp" />
+
+    <!--<ImageView-->
+        <!--android:layout_width="fill_parent"-->
+        <!--android:layout_height="fill_parent"-->
+        <!--android:id="@+id/imageView8"-->
+        <!--android:layout_below="@+id/imageView7"-->
+        <!--android:src="@drawable/motion"-->
+        <!--android:layout_marginTop="200dp"-->
+        <!--android:scaleType="centerCrop"-->
+        <!--android:paddingTop="150dp" />-->
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/imageView7"
+        android:layout_marginTop="50dp">
+
+        <ImageView
+            android:id="@+id/imageView8"
+            android:layout_width="900dp"
+            android:layout_height="900dp"
+            android:scaleType="centerCrop"
+            android:layout_gravity="center_horizontal"
+            android:layout_x="-100dp"
+            android:layout_y="70dp"
+            android:src="@drawable/motion" />
+
+    </FrameLayout>
+</RelativeLayout>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="node8.valetuncle.PhoneResetActivity">
+
+
+    <include
+        layout="@layout/toolbar_back"
+        android:id="@+id/include"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/include"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:padding="10dp"
+        android:background="@color/colorBG">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/phone_hint"
+            android:id="@+id/textView2"
+            android:layout_alignParentBottom="false"
+            android:layout_alignParentLeft="false"
+            android:layout_alignParentStart="false"
+            android:textAlignment="center"
+            android:textColor="@color/colorText"
+            android:layout_marginTop="30dp" />
+
+        <!--<android.support.design.widget.TextInputLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/bg_edit_text"-->
+            <!--android:layout_marginTop="10dp">-->
+
+            <!--<EditText-->
+                <!--android:id="@+id/UserName"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:hint="Phone Number"-->
+                <!--android:inputType="text"-->
+                <!--android:enabled="false" />-->
+        <!--</android.support.design.widget.TextInputLayout>-->
+
+
+        <LinearLayout
+            android:id="@+id/linearUserJobWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:background="@drawable/bg_form_white"
+            android:weightSum="2">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:defaultCode="65"
+                android:layout_weight="0"
+                android:layout_gravity="center_vertical" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/websiteWrapper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="2"
+                android:paddingLeft="10dp"
+                android:textColorHint="@color/colorGrayLight"
+                android:layout_gravity="center_vertical"
+                android:visibility="visible">
+
+                <EditText
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mobile"
+                    android:textColor="@color/colorAccent"
+                    android:inputType="phone" />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/sendBtn"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_buttons_main"
+            android:text="SEND CONFIRMATION CODE"
+            android:textAllCaps="false"
+            android:textColor="@drawable/button_forgot_text_color"
+            android:layout_marginTop="50dp"
+            android:layout_alignParentBottom="true" />
+
+    </LinearLayout>
+
+</RelativeLayout>

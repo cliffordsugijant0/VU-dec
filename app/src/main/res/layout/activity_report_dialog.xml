@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context="node8.valetuncle.dialogs.ReportDialogActivity">
+
+
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textAppearance="?android:attr/textAppearanceLarge"
+    android:text="REPORT YOUR DRIVER"
+    android:id="@+id/textView13"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="20dp" />
+
+<View
+    android:layout_width="match_parent"
+    android:layout_height="2dp"
+    android:background="@android:color/holo_green_dark"
+    android:layout_below="@id/textView13"
+    android:layout_marginTop="10dp"
+    android:id="@+id/view" />
+
+<EditText
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:id="@+id/editText"
+    android:layout_below="@+id/view"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="20dp"
+    android:hint="@string/report_hint" />
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="3dp"
+    android:layout_below="@+id/editText"
+    android:layout_centerHorizontal="true">
+
+    <TextView
+        android:layout_width="121dp"
+        android:layout_height="37dp"
+        android:id="@+id/cancelBtn"
+        android:gravity="center"
+        android:background="@drawable/bg_buttons_main_red"
+        android:textColor="@color/colorWhite"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/include2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:text="CANCEL"
+        android:layout_marginRight="3dp"
+        android:paddingLeft="15dp"
+        android:paddingEnd="20dp"
+        />
+
+    <TextView
+        android:layout_width="121dp"
+        android:layout_height="37dp"
+        android:gravity="center"
+        android:background="@drawable/bg_buttons_main_green"
+        android:textColor="@color/colorWhite"
+        android:text="SUBMIT"
+        android:textStyle="normal|bold"
+        android:layout_below="@+id/include2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="3dp"
+        android:id="@+id/submitBtn"
+        android:paddingLeft="15dp"
+        android:paddingEnd="20dp" />
+</LinearLayout>
+
+</RelativeLayout>

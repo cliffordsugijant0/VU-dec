@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000000ff"
+    tools:context="node8.valetuncle.dialogs.PromoDialogActivity">
+
+    <ImageView
+        android:layout_width="fill_parent"
+        android:layout_height="400dp"
+        android:id="@+id/promoImage"
+        android:layout_margin="30dp" />
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/closeBtn"
+        android:src="@drawable/delete"
+        android:background="@null"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/promoImage"
+        android:layout_marginLeft="-50dp" />
+</RelativeLayout>

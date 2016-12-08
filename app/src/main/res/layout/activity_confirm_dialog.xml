@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+    android:background= "#00000000"
+tools:context="node8.valetuncle.dialogs.ConfirmDialogActivity">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:padding="10dp"
+    android:background="#FFFFFF"
+    android:id="@+id/relativeLayout2">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="THANKS FOR USING VALETUNCLE"
+        android:textStyle="bold"
+        android:textColor="@color/colorPrimaryDark"
+        android:textSize="16sp"
+        android:id="@+id/textView13"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="20dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@android:color/holo_green_dark"
+        android:layout_below="@id/textView13"
+        android:layout_marginTop="10dp"
+        android:id="@+id/view" />
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text=""
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:id="@+id/dateTV"
+        android:layout_below="@id/view"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:lines="2"
+        android:text=""
+        android:layout_marginTop="10dp"
+        android:textColor="@color/colorBlack"
+        android:layout_below="@id/dateTV"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/addressTV"
+        android:textAlignment="center" />
+
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:textSize="60sp"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        android:id="@+id/feeTV"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/addressTV" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_below="@+id/feeTV"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout2"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="37dp"
+            android:id="@+id/arrivedBtn"
+            android:gravity="center"
+            android:background="@drawable/bg_buttons_main_red"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal|bold"
+            android:layout_below="@+id/include2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="ARRIVED AT DESTINATION"
+            android:layout_marginRight="3dp"
+            android:textAlignment="center"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="37dp"
+            android:gravity="center"
+            android:background="@drawable/bg_buttons_main_green"
+            android:textColor="@color/colorWhite"
+            android:text="CANCEL TRANSACTION"
+            android:textStyle="normal|bold"
+            android:layout_below="@+id/include2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="3dp"
+            android:id="@+id/cancelBtn"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentBottom="true"
+    android:background="@color/colorWhite"
+    android:layout_centerHorizontal="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/linearLayout3"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="37dp"
+            android:id="@+id/shareBtn"
+            android:gravity="center"
+            android:background="@drawable/bg_dialog"
+            android:textColor="@color/colorPrimaryDark"
+            android:textStyle="normal|bold"
+            android:layout_below="@+id/include2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="SHARE VALET UNCLE"
+            android:layout_marginRight="3dp"
+            android:paddingLeft="15dp"
+            android:textAlignment="center"
+            android:textSize="22sp" />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="37dp"
+            android:gravity="center"
+            android:background="@drawable/bg_dialog"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="REVIEW OUR APP"
+            android:textStyle="normal|bold"
+            android:layout_below="@+id/include2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="3dp"
+            android:id="@+id/reviewBtn"
+            android:paddingLeft="15dp"
+            android:textSize="22sp" />
+
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="37dp"
+            android:gravity="center"
+            android:background="@drawable/bg_buttons_main_red"
+            android:textColor="@color/colorWhite"
+            android:text="REPORT DRIVER"
+            android:textStyle="normal|bold"
+            android:layout_below="@+id/include2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="3dp"
+            android:id="@+id/reportBtn"
+            android:paddingLeft="15dp"
+            android:textSize="22sp" />
+    </LinearLayout>
+</RelativeLayout>
+</RelativeLayout>
+

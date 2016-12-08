@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent"
+android:background="@drawable/bg_dialog"
+    android:padding="15dp"
+tools:context="node8.valetuncle.dialogs.SearchingDialogActivity">
+
+
+<TextView
+    android:text="REQUESTING DRIVER..."
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_alignParentLeft="false"
+    android:layout_alignParentStart="false"
+    android:layout_centerHorizontal="true"
+    android:id="@+id/textView"
+    android:textSize="22sp"
+    android:textColor="@color/colorMainValet"
+    android:textStyle="normal|bold"
+    android:layout_marginTop="5dp" />
+
+<ProgressBar
+    style="?android:attr/progressBarStyleLarge"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:layout_marginTop="30dp"
+    android:id="@+id/progressBar2"
+    android:layout_below="@+id/textView"
+    android:layout_centerHorizontal="true" />
+
+<TextView
+    android:text="CANCEL"
+    android:layout_width="match_parent"
+    android:layout_height="30dp"
+    android:layout_below="@+id/progressBar2"
+    android:layout_centerHorizontal="true"
+    android:layout_marginTop="44dp"
+    android:id="@+id/textView5"
+    android:background="@drawable/bg_buttons_main_red"
+    tools:textColor="@drawable/button_text_color_main"
+    android:textAllCaps="true"
+    android:textAlignment="center"
+    android:visibility="gone"
+    android:paddingTop="7dp" />
+
+</RelativeLayout>

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context="node8.valetuncle.ProfileActivity">
+
+
+    <include
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        layout="@layout/top_bar_text"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+
+        android:layout_alignParentEnd="true"
+        android:id="@+id/top_bar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/top_bar">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="15dp"
+        android:layout_below="@+id/top_bar"
+        android:orientation="vertical">
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/fnET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Full Name"
+                android:enabled="false"
+                android:inputType="text" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/emailET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Email"
+                android:enabled="false"/>
+        </android.support.design.widget.TextInputLayout>
+
+        <LinearLayout
+            android:id="@+id/linearUserJobWrapper"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="25dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            android:weightSum="2">
+
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="0"
+                android:layout_gravity="center_vertical" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/websiteWrapper"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="1dp"
+                android:layout_weight="2"
+                android:paddingLeft="10dp"
+                android:textColorHint="@color/colorGrayLight"
+                android:layout_gravity="center_vertical"
+                android:visibility="visible">
+
+                <EditText
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Mobile"
+                    android:enabled="false"
+                    android:textColor="@color/colorAccent"
+                    android:inputType="phone" />
+
+            </android.support.design.widget.TextInputLayout>
+        </LinearLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/addressET"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/Address"
+                android:enabled="false"
+                android:inputType="textEmailAddress" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/curPassLayout"
+            android:layout_marginTop="8dp"
+            >
+
+            <EditText
+                android:id="@+id/curPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:enabled="false"
+                android:hint="Current password"
+                android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/newPassLayout"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/newPass"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="New Password"
+                android:inputType="textPassword"/>
+        </android.support.design.widget.TextInputLayout>
+
+
+        <android.support.design.widget.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:id="@+id/confirmPassLayout"
+            android:layout_marginTop="8dp">
+
+            <EditText
+                android:id="@+id/UserConfirmPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/ConfirmPassword"
+                android:inputType="textPassword" />
+        </android.support.design.widget.TextInputLayout>
+
+
+        <Button
+            android:id="@+id/editBtn"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:background="@drawable/bg_buttons_main"
+            android:text="EDIT"
+            android:textColor="@drawable/button_forgot_text_color"
+            android:textSize="15sp"
+            android:visibility="visible"
+            android:layout_marginTop="10dp" />
+
+    </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

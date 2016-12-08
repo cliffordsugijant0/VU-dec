@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/bg_dialog"
+    android:padding="15dp"
+    tools:context="node8.valetuncle.dialogs.FeeDialogActivity">
+
+
+    <TextView
+        android:text="NO DRIVER FOUND"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="false"
+        android:layout_alignParentStart="false"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/textView"
+        tools:textColor="@color/colorRed"
+        android:textStyle="normal|bold"
+        android:visibility="gone"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:text="The fee will be bla Lorem ipsum bla bla bla bla the feeeeee Lorem ipsum bla bla bla bla the feeeeee"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/feeTV"
+        tools:textColor="@android:color/black"
+        android:textStyle="normal|bold"
+        android:layout_marginTop="15dp"
+        android:textAlignment="center" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="3dp"
+        android:layout_below="@+id/feeTV"
+        android:layout_centerHorizontal="true">
+
+        <TextView
+            android:layout_width="121dp"
+            android:layout_height="37dp"
+            android:id="@+id/noBtn"
+            android:gravity="center"
+            android:background="@drawable/bg_buttons_main_red"
+            android:textColor="@color/colorWhite"
+            android:textStyle="normal|bold"
+            android:layout_below="@+id/include2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:text="NO"
+            android:layout_marginRight="3dp"
+            android:paddingLeft="15dp"
+            android:paddingEnd="20dp"
+            />
+
+        <TextView
+            android:layout_width="121dp"
+            android:layout_height="37dp"
+            android:gravity="center"
+            android:background="@drawable/bg_buttons_main_green"
+            android:textColor="@color/colorWhite"
+            android:text="YES"
+            android:textStyle="normal|bold"
+            android:layout_below="@+id/include2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="3dp"
+            android:id="@+id/yesBtn"
+            android:paddingLeft="15dp"
+            android:paddingEnd="20dp" />
+    </LinearLayout>
+
+</RelativeLayout>

@@ -1,0 +1,118 @@
+{
+  "project_info": {
+    "project_number": "490182507382",
+    "project_id": "valetuncle-8d62d"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490182507382:android:e68bc23fc01b1d1b",
+        "android_client_info": {
+          "package_name": "node8.valetuncle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490182507382-535jtu57lneqmlun90658ilei5o7iaka.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "node8.valetuncle",
+            "certificate_hash": "0D5089DCA69ABFF3BFBB1D71E309E4C804E931D3"
+          }
+        },
+        {
+          "client_id": "490182507382-eiq640b5sodb1q01nio9av9rf1vgai7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXRlGbVGI0LGfZQNYJ2HVFC1k1rjsPD_4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490182507382:android:70d74f78745b5fd3",
+        "android_client_info": {
+          "package_name": "node8.gcm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490182507382-eiq640b5sodb1q01nio9av9rf1vgai7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXRlGbVGI0LGfZQNYJ2HVFC1k1rjsPD_4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490182507382:android:68a651e0ebd28262",
+        "android_client_info": {
+          "package_name": "net.node8.valetunclenew"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490182507382-431h6jm2v57dtj17cvn5r0275qe75sk4.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "net.node8.valetunclenew",
+            "certificate_hash": "0D5089DCA69ABFF3BFBB1D71E309E4C804E931D3"
+          }
+        },
+        {
+          "client_id": "490182507382-eiq640b5sodb1q01nio9av9rf1vgai7e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAXRlGbVGI0LGfZQNYJ2HVFC1k1rjsPD_4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

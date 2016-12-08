@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "250225782552",
+    "firebase_url": "https://valetuncle-d2913.firebaseio.com",
+    "project_id": "valetuncle-d2913",
+    "storage_bucket": "valetuncle-d2913.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:250225782552:android:e68bc23fc01b1d1b",
+        "android_client_info": {
+          "package_name": "node8.valetuncle"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "250225782552-7ufeg2ti0esropthnmqinn9e4ie5f7dm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDy3wXuhT_NV4UBsx4pu38dlbMSO_Cbkx4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

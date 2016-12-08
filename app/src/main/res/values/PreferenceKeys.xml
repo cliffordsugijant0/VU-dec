@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="preference_file_key">net.node8.valetunclenew.local_preferences</string>
+    <string name="intro_completed">intro_completed</string>
+    <string name="user_id">UserID</string>
+    <string name="session_id">SessionID</string>
+    <string name="logged_in">LoggedIn</string>
+    <string name="fee_msg">FeeMsg</string>
+    <string name="fee">Fee</string>
+    <string name="username">Username</string>
+    <string name="displayName">DisplayName</string>
+    <string name="transId">TransId</string>
+    <string name="promo_code">PromoCode</string>
+    <string name="remark">Remark</string>
+    <string name="pickup">Pickup</string>
+    <string name="pickup_address">PickupAddress</string>
+    <string name="actual_location">ActualLocation</string>
+    <string name="auth_token">authToken</string>
+    <string name="password">Password</string>
+    <string name="social_id">socialID</string>
+    <string name="confirmation_code">ConfirmationCode</string>
+    <string name="notifications">notifications</string>
+    <string name="imgurl">imgurl</string>
+    <string name="jwt_token">jwt</string>
+</resources>
