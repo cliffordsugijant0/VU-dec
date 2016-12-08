@@ -100,6 +100,7 @@ public interface AuthenticationAPI {
     /**
      * method to get detail
      */
+    @FormUrlEncoded
     @POST("user/status-login/")
     Call<User> status(@Field("username") String username);
 

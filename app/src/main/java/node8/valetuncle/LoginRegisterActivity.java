@@ -156,7 +156,7 @@ public class LoginRegisterActivity extends AppCompatActivity implements GoogleAp
                     UserData.setLoggedIn("true");
 
                     UserData.flushSettings();
-                    if(userResponse.getStatuslogin()==0){
+                    if(userResponse.getStatuslogin()==null || userResponse.getStatuslogin()==0){
                         finish();
                         startActivity(new Intent(LoginRegisterActivity.this, MapsActivity.class));
                     }
