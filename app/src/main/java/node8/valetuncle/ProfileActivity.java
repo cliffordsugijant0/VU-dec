@@ -215,22 +215,25 @@ public class ProfileActivity extends AppCompatActivity {
 //        user.setUsername(UserData.getUsername());
 //        user.setPassword(UserData.getPassword());
 
-
-                    fnET.setText(user.getName());
-                    emailET.setText(user.getEmail());
-                    String fullCode = user.getPhoneCode();
+        if(user.getName()!=null)
+            fnET.setText(user.getName());
+        if(user.getEmail()!=null)
+            emailET.setText(user.getEmail());
+        if(user.getPhoneCode()!=null) {
+            String fullCode = user.getPhoneCode();
 //                    Logger.e();
-                    Logger.e("phone code" + fullCode + " "+ fullCode.substring(1));
-                    ccp.setCountryForPhoneCode(Integer.parseInt(fullCode.substring(1)));
+            Logger.e("phone code" + fullCode + " " + fullCode.substring(1));
+            ccp.setCountryForPhoneCode(Integer.parseInt(fullCode.substring(1)));
 //                    ccp.setDefaultCountryUsingPhoneCode(Integer.parseInt(fullCode.substring(1)));
-                    mobileET.setText(user.getPhoneNumber());
-
-        addressET.setText(user.getCompleteaddress());
-                    curPassET.setText(UserData.getPassword());
-
-
+            mobileET.setText(user.getPhoneNumber());
+        }
+        if(user.getCompleteaddress()!=null)
+            addressET.setText(user.getCompleteaddress());
+        if(user.getPassword()!=null)
+            curPassET.setText(UserData.getPassword());
 
     }
+
     public void getUserSync(){
         final User user = new User(UserData.getObjectId());
 

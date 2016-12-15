@@ -1,17 +1,24 @@
 package node8.valetuncle.dialogs;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import com.orhanobut.logger.Logger;
 
+import java.io.IOException;
+
+import node8.valetuncle.MapsActivity;
 import node8.valetuncle.R;
 import node8.valetuncle.core.APIService;
+import node8.valetuncle.core.AuthenticationAPI;
 import node8.valetuncle.core.TransactionAPI;
 import node8.valetuncle.core.UserData;
 import node8.valetuncle.core.models.Transaction;
@@ -23,11 +30,15 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.realm.Realm;
 import io.realm.RealmConfiguration;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import uk.co.chrisjenx.calligraphy.CalligraphyContextWrapper;
 
 public class ConfirmDialogActivity extends AppCompatActivity {
 
     TransactionAPI transactionAPIWithToken;
+    AuthenticationAPI authenticationAPIWithToken = APIService.createService(AuthenticationAPI.class, UserData.getAuthToken());
 
     public static String FACEBOOK_URL = "https://www.facebook.com/ValetUncle/";
     public static String FACEBOOK_PAGE_ID = "ValetUncle";
@@ -188,5 +199,61 @@ public class ConfirmDialogActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e) {
             return FACEBOOK_URL; //normal web url
         }
+    }
+
+    private final BroadcastReceiver broadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            String message = intent.getStringExtra("message");
+            Utils.Toast(getApplicationContext(),message);
+            update();
+            Intent i = new Intent(getApplicationContext(), MapsActivity.class);
+            startActivity(i);
+            finish();
+        }
+    };
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        ConfirmDialogActivity.this.getApplicationContext().registerReceiver(broadcastReceiver, new IntentFilter("back"));
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        ConfirmDialogActivity.this.getApplicationContext().unregisterReceiver(broadcastReceiver);
+    }
+
+    public void update(){
+        User user = new User(UserData.getObjectId());
+        user.setCurpage("0");
+
+        Call<User> call = authenticationAPIWithToken.update(user);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                if(response.isSuccessful()){
+                    Log.v("enter update","ENTER");
+                }else{
+                    try {
+                        Log.v("enter update","failed "+response.code()+" "+response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Utils.Toast(ConfirmDialogActivity.this,getString(R.string.InternetConnection));
+
+                Logger.e(t.getMessage());
+
+            }
+        });
+
     }
 }

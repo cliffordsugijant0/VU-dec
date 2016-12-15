@@ -82,7 +82,7 @@ public class User extends RealmObject {
     private Integer premium;
     @SerializedName("show_promo")
     @Expose
-    private Integer showPromo;
+    private Boolean showPromo;
     @SerializedName("photo_url")
     @Expose
     private String photoUrl;
@@ -548,7 +548,7 @@ public class User extends RealmObject {
      * @return
      * The showPromo
      */
-    public Integer getShowPromo() {
+    public Boolean getShowPromo() {
         return showPromo;
     }
 
@@ -557,7 +557,7 @@ public class User extends RealmObject {
      * @param showPromo
      * The show_promo
      */
-    public void setShowPromo(Integer showPromo) {
+    public void setShowPromo(Boolean showPromo) {
         this.showPromo = showPromo;
     }
 

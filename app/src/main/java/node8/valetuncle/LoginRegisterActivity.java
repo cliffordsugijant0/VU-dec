@@ -33,6 +33,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
 import com.orhanobut.logger.Logger;
@@ -71,7 +72,7 @@ public class LoginRegisterActivity extends AppCompatActivity implements GoogleAp
     private GoogleApiClient client;
 
     AuthenticationAPI authenticationAPIWithoutToken = APIService.createService(AuthenticationAPI.class, null);
-    AuthenticationAPI authenticationAPIWithToken;
+    AuthenticationAPI authenticationAPIWithToken = APIService.createService(AuthenticationAPI.class, UserData.getAuthToken());
 
 
 
@@ -105,7 +106,7 @@ public class LoginRegisterActivity extends AppCompatActivity implements GoogleAp
         public void onError(FacebookException exception) {
             // App code
             Log.e("facebookexception", exception.getMessage());
-            Toast.makeText(LoginRegisterActivity.this,getString(R.string.InternetConnection),Toast.LENGTH_LONG).show();
+            Utils.Toast(LoginRegisterActivity.this,getString(R.string.InternetConnection));
         }
 
     };
@@ -143,8 +144,6 @@ public class LoginRegisterActivity extends AppCompatActivity implements GoogleAp
 
                 M.hideDialog();
                 if (response.isSuccessful()) {
-
-
                     User userResponse = response.body();
 
                     Logger.e("logn 200" + userResponse.getPk());
@@ -153,18 +152,20 @@ public class LoginRegisterActivity extends AppCompatActivity implements GoogleAp
                     UserData.setPassword(_pass);
 
                     UserData.setAuthToken(userResponse.getToken());
-                    UserData.setLoggedIn("true");
+//                    UserData.setLoggedIn("true");
 
                     UserData.flushSettings();
-                    if(userResponse.getStatuslogin()==null || userResponse.getStatuslogin()==0){
-                        finish();
-                        startActivity(new Intent(LoginRegisterActivity.this, MapsActivity.class));
+                    Log.v("Status login",userResponse.getStatuslogin()+" ");
+                    if(userResponse.getStatuslogin()==0){
+                        Log.v("Enter if","ENTER");
+                        update();
                     }
                     else{
+                        Log.v("Enter else","ELSE");
                         if(userResponse.getStatuslogin()==1)
-                            Toast.makeText(LoginRegisterActivity.this,getString(R.string.loggedin_message),Toast.LENGTH_LONG).show();
+                            Utils.Toast(LoginRegisterActivity.this,getString(R.string.loggedin_message));
                         else
-                            Toast.makeText(LoginRegisterActivity.this,getString(R.string.maintenance_message),Toast.LENGTH_LONG).show();
+                            Utils.Toast(LoginRegisterActivity.this,getString(R.string.maintenance_message));
                     }
 
 
@@ -205,13 +206,13 @@ public class LoginRegisterActivity extends AppCompatActivity implements GoogleAp
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-                    Utils.Toast(getApplicationContext(), "Password incorrect");
+                    Utils.Toast(getApplicationContext(), "Username or password incorrect");
                 }
             }
 
             @Override
             public void onFailure(Call<User> call, Throwable t) {
-                Toast.makeText(LoginRegisterActivity.this,getString(R.string.InternetConnection),Toast.LENGTH_LONG).show();
+                Utils.Toast(LoginRegisterActivity.this,getString(R.string.InternetConnection));
                 M.hideDialog();
             }
         });
@@ -424,7 +425,7 @@ public class LoginRegisterActivity extends AppCompatActivity implements GoogleAp
             startActivity(intent);
         } else {
             // Signed out, show unauthenticated UI.
-            Toast.makeText(LoginRegisterActivity.this,getString(R.string.InternetConnection),Toast.LENGTH_LONG).show();
+            Utils.Toast(LoginRegisterActivity.this,getString(R.string.InternetConnection));
 //            updateUI(false);
         }
     }
@@ -442,5 +443,40 @@ public class LoginRegisterActivity extends AppCompatActivity implements GoogleAp
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
         Log.v("Test error", connectionResult.getErrorMessage());
+    }
+
+    public void update(){
+        User user = new User(UserData.getObjectId());
+        user.setStatuslogin(1);
+        user.setToken(FirebaseInstanceId.getInstance().getToken());
+
+        Call<User> call = authenticationAPIWithToken.update(user);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                if(response.isSuccessful()){
+                    Log.v("enter update","ENTER");
+                    finish();
+                    startActivity(new Intent(LoginRegisterActivity.this,MapsActivity.class));
+                }else{
+                    try {
+                        Log.v("enter update","failed "+response.code()+" "+response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Utils.Toast(LoginRegisterActivity.this,getString(R.string.InternetConnection));
+
+                Logger.e(t.getMessage());
+
+            }
+        });
+
     }
 }

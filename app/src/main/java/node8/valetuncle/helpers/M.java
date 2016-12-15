@@ -1,12 +1,19 @@
 package node8.valetuncle.helpers;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.NotificationManager;
 import android.app.ProgressDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 
+import node8.valetuncle.BuildConfig;
 import node8.valetuncle.R;
 
 
@@ -59,4 +66,24 @@ public class M {
         return false;
     }
 
+    public static void updateApp(final Activity act) {
+        final String appPackageName = BuildConfig.APPLICATION_ID;
+        AlertDialog.Builder builder = new AlertDialog.Builder(act);
+        builder
+                .setTitle(act.getString(R.string.dialog_title_update_app))
+                .setMessage(act.getString(R.string.dialog_google_credentials_message))
+                .setNegativeButton(act.getString(R.string.Cancel), null)
+                .setPositiveButton(act.getString(R.string.GotIt), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        try {
+                            act.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
+                        } catch (ActivityNotFoundException anfe) {
+                            act.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
+                        }
+                    }
+                });
+        AlertDialog dialog = builder.create();
+        dialog.show();
+    }
 }

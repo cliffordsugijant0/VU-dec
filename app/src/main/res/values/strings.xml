@@ -72,6 +72,7 @@
     <string name="Yes">Yes</string>
     <string name="No">No</string>
     <string name="Cancel">Cancel</string>
+    <string name="GotIt">Got It</string>
     <string name="Unblock">Unblock</string>
     <string name="deactivateAccountMakeSure">Are you sure that you want to deactivate your account,if your answer is \"Yes\" then you can activate your account by login again to your account.</string>
     <string name="NoPosts">No Posts To Show</string>
@@ -265,5 +266,7 @@
     (If you submit another report, then the last report will be replaced)</string>
 
     <string name="facebook_app_id">226350434455687</string>
+    <string name="dialog_title_update_app">Update available</string>
+    <string name="dialog_google_credentials_message">Please update your app to latest version.</string>
 
 </resources>

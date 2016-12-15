@@ -72,7 +72,7 @@ public class PromoDialogActivity extends AppCompatActivity {
     private void updateUser(){
         User userUpdate = new User(UserData.getObjectId());
 
-        userUpdate.setShowPromo(1);
+        userUpdate.setShowPromo(true);
 
         Call<User> call = authenticationAPIWithToken.update(userUpdate);
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +20,8 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.orhanobut.logger.Logger;
+
+import java.io.IOException;
 
 import node8.valetuncle.R;
 
@@ -66,6 +69,7 @@ public class MapsDetailActivity extends FragmentActivity implements OnMapReadyCa
     }
 
     @OnClick(R.id.backBtn) void back(){
+        update();
         finish();
         startActivity(new Intent(this,MapsActivity.class));
 
@@ -309,5 +313,42 @@ public class MapsDetailActivity extends FragmentActivity implements OnMapReadyCa
 
     }
 
+    public void update(){
+        User user = new User(UserData.getObjectId());
+        user.setCurpage("0");
 
+        Call<User> call = authenticationAPIWithToken.update(user);
+
+        call.enqueue(new Callback<User>() {
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+
+                if(response.isSuccessful()){
+                    Log.v("enter update","ENTER");
+                }else{
+                    try {
+                        Log.v("enter update","failed "+response.code()+" "+response.errorBody().string());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+                Utils.Toast(MapsDetailActivity.this,getString(R.string.InternetConnection));
+
+                Logger.e(t.getMessage());
+
+            }
+        });
+
+    }
+
+    @Override
+    public void onBackPressed(){
+        update();
+        finish();
+        startActivity(new Intent(this,MapsActivity.class));
+    }
 }

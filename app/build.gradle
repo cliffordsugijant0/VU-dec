@@ -54,5 +54,6 @@ dependencies {
     compile 'com.google.firebase:firebase-messaging:9.0.0'
 //    compile 'com.afollestad.material-dialogs:core:0.9.0.1'
     testCompile 'junit:junit:4.12'
+    compile 'org.jsoup:jsoup:1.8.3'
 }
 apply plugin: 'com.google.gms.google-services'

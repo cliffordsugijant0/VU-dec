@@ -3,13 +3,18 @@ package node8.valetuncle;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.res.Resources;
 import android.location.Geocoder;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.text.Html;
+import android.text.Spanned;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.location.Address;
@@ -21,6 +26,12 @@ import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesNotAvailableException;
+import com.google.android.gms.common.GooglePlayServicesRepairableException;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.location.places.Place;
+import com.google.android.gms.location.places.ui.PlaceAutocomplete;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -28,9 +39,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.orhanobut.logger.Logger;
-
-import node8.valetuncle.R;
 
 import node8.valetuncle.core.APIService;
 import node8.valetuncle.core.AuthenticationAPI;
@@ -40,10 +50,11 @@ import node8.valetuncle.core.models.Fee;
 import node8.valetuncle.core.models.History;
 import node8.valetuncle.core.models.Promo;
 import node8.valetuncle.core.models.User;
+import node8.valetuncle.dialogs.FeeDialogActivity;
 import node8.valetuncle.dialogs.PromoDialogActivity;
-import node8.valetuncle.helpers.CheckNetwork;
 import node8.valetuncle.helpers.GPSTracker;
 import node8.valetuncle.helpers.M;
+import node8.valetuncle.helpers.Utils;
 import node8.valetuncle.views.AnimationLayout;
 
 import org.json.JSONArray;
@@ -105,8 +116,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @BindView(R.id.addTxt)
     TextView addTxt;
 
+    @OnClick(R.id.addTxt) void addTextClicked(){
+        if(M.isNetworkAvailable(MapsActivity.this))
+            openAutocompleteActivity();
+        else
+            Toast.makeText(MapsActivity.this,getString(R.string.InternetConnection),Toast.LENGTH_LONG).show();
+    }
+
     @OnClick(R.id.profileTV) void profileClicked(){
-        if(CheckNetwork.isInternetAvailable(MapsActivity.this))
+        if(M.isNetworkAvailable(MapsActivity.this))
             startActivity(new Intent(MapsActivity.this,ProfileActivity.class));
         else
             Toast.makeText(MapsActivity.this,getString(R.string.InternetConnection),Toast.LENGTH_LONG).show();
@@ -115,14 +133,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     @OnClick(R.id.historyTV) void historyClicked(){
-        if(CheckNetwork.isInternetAvailable(MapsActivity.this))
+        if(M.isNetworkAvailable(MapsActivity.this))
             startActivity(new Intent(MapsActivity.this,HistoryActivity.class));
         else
             Toast.makeText(MapsActivity.this,getString(R.string.InternetConnection),Toast.LENGTH_LONG).show();
     }
 
     @OnClick(R.id.aboutTV) void aboutClicked(){
-        if(CheckNetwork.isInternetAvailable(MapsActivity.this))
+        if(M.isNetworkAvailable(MapsActivity.this))
             startActivity(new Intent(MapsActivity.this,AboutActivity.class));
         else
             Toast.makeText(MapsActivity.this,getString(R.string.InternetConnection),Toast.LENGTH_LONG).show();
@@ -130,7 +148,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     @OnClick(R.id.promoTV) void promoClicked(){
-        if(CheckNetwork.isInternetAvailable(MapsActivity.this))
+        if(M.isNetworkAvailable(MapsActivity.this))
             startActivity(new Intent(MapsActivity.this,PromoActivity.class));
         else
             Toast.makeText(MapsActivity.this,getString(R.string.InternetConnection),Toast.LENGTH_LONG).show();
@@ -176,7 +194,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
     @OnClick(R.id.pickUpBtn) void pickUpClicked(){
-        if(CheckNetwork.isInternetAvailable(MapsActivity.this)){
+        if(M.isNetworkAvailable(MapsActivity.this)){
             Intent i = new Intent(MapsActivity.this, MapsDetailActivity.class);
             i.putExtra("fromMaps", "toDetail");
             i.putExtra("address", addTxt.getText().toString());
@@ -247,7 +265,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 );
 
         if(M.isNetworkAvailable(MapsActivity.this)){
-
+            Log.v("call gets","enter");
             getFeeDetail();
             getPromo();
             getUser();
@@ -256,6 +274,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //            Utils.Toast(MapsActivity.this,"Please check your internet connection");
         }
 
+        final String refreshedToken = FirebaseInstanceId.getInstance().getToken();
+        Log.v("FCM TOKEN",refreshedToken);
     }
 
 
@@ -285,12 +305,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         callUser.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-
+                Log.v("Enter here","enter");
 //                M.hideDialog();
                 if(response.isSuccessful()){
 
                     User user = response.body();
-
+                    Log.v("detail",user.getName());
 
                     user.setUsername(UserData.getUsername());
                     user.setPassword(UserData.getPassword());
@@ -299,12 +319,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                     userRealm.copyToRealmOrUpdate(user);
                     userRealm.commitTransaction();
 
-                    if(user.getShowPromo() == 1){
+                    if(user.getShowPromo()){
 
                         startActivity(new Intent(MapsActivity.this, PromoDialogActivity.class));
 
                     }
-
+                    if(user.getCurpage().equals("1")||user.getCurpage().equals("2"))
+                        startActivity(new Intent(MapsActivity.this, MapsDetailActivity.class));
+                    else if(user.getCurpage().equals("5"))
+                        Utils.Toast(getApplicationContext(),getString(R.string.maintenance_message));
 
                 }else{
 //                    M.hideDialog();
@@ -416,7 +439,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap = googleMap;
 
         // Add a marker in Sydney and move the camera
-        LatLng sydney = new LatLng(-34, 151);
+//        LatLng sydney = new LatLng(-34, 151);
 //        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
 //        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
@@ -471,43 +494,43 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
 
                 MapsActivity.this.center = new LatLng(mMap.getCameraPosition().target.latitude, mMap.getCameraPosition().target.longitude);
-//                if (gps.canGetLocation) {
-//
-//
-//                    if (cameraPosition.zoom != currentZoom) {
-//                        isZoomed = true;
-//                        currentZoom = cameraPosition.zoom;  // here you get zoom level
-//
-//                        CameraUpdate initCenter =
-//                                CameraUpdateFactory.newLatLng(new LatLng(centerZoom.latitude, centerZoom.longitude));
-//
-//                        mMap.moveCamera(initCenter);
-//                        CameraUpdate zoom = CameraUpdateFactory.zoomTo(currentZoom);
-//                        mMap.stopAnimation();
-//                        mMap.animateCamera(zoom);
-//                        mMap.stopAnimation();
-//                    } else {
-//                        isZoomed = false;
-//                        center = mMap.getCameraPosition().target;
-//                    }
-//
-//                    if (!isZoomed) {
-//                        centerZoom = center;
-//                    }
-//
-//
-////                    Log.e("camera",""+center.latitude+center.longitude);
-//
-//                    try {
-//                        new GetLocationAsync(center.latitude, center.longitude)
-//                                .execute();
-////                        asd(center.latitude,center.longitude);
-//
-//
-//                    } catch (Exception e) {
-//                    }
-//
-//                }
+                if (gps.canGetLocation) {
+
+
+                    if (cameraPosition.zoom != currentZoom) {
+                        isZoomed = true;
+                        currentZoom = cameraPosition.zoom;  // here you get zoom level
+
+                        CameraUpdate initCenter =
+                                CameraUpdateFactory.newLatLng(new LatLng(centerZoom.latitude, centerZoom.longitude));
+
+                        mMap.moveCamera(initCenter);
+                        CameraUpdate zoom = CameraUpdateFactory.zoomTo(currentZoom);
+                        mMap.stopAnimation();
+                        mMap.animateCamera(zoom);
+                        mMap.stopAnimation();
+                    } else {
+                        isZoomed = false;
+                        center = mMap.getCameraPosition().target;
+                    }
+
+                    if (!isZoomed) {
+                        centerZoom = center;
+                    }
+
+
+//                    Log.e("camera",""+center.latitude+center.longitude);
+
+                    try {
+                        new GetLocationAsync(center.latitude, center.longitude)
+                                .execute();
+//                        asd(center.latitude,center.longitude);
+
+
+                    } catch (Exception e) {
+                    }
+
+                }
 
 
             }
@@ -542,7 +565,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (mLayout.isOpening()) {
             mLayout.closeSidebar();
         } else {
-//            finish();
+            finish();
         }
     }
 
@@ -784,7 +807,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 Logger.e("not able");
                 checkGPS();
             }
-
 //            String provider = Settings.Secure.getString(getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
 //            if(provider != null){
 ////                Log.v(TAG, " Location providers: "+provider);
@@ -795,6 +817,37 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                //Users did not switch on the GPS
 //                Logger.e("not able");
 //            }
+        }
+        // Check that the result was from the autocomplete widget.
+        if (requestCode == REQUEST_CODE_AUTOCOMPLETE) {
+            if (resultCode == RESULT_OK) {
+                // Get the user's selected place from the Intent.
+                Place place = PlaceAutocomplete.getPlace(this, data);
+                Log.i("Place Selected: ", place.getName()+"");
+
+                // Format the place's details and display them in the TextView.
+//                addTxt.setText(formatPlaceDetails(getResources(), place.getName(),
+//                        place.getId(), place.getAddress(), place.getPhoneNumber(),
+//                        place.getWebsiteUri()));
+                new GetLocationAsync(place.getLatLng().latitude, place.getLatLng().longitude).execute();
+
+                CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 17);
+                mMap.animateCamera(cameraUpdate);
+
+                // Display attributions if required.
+                CharSequence attributions = place.getAttributions();
+                if (!TextUtils.isEmpty(attributions)) {
+                    addTxt.setText(Html.fromHtml(attributions.toString()));
+                } else {
+                    addTxt.setText("");
+                }
+            } else if (resultCode == PlaceAutocomplete.RESULT_ERROR) {
+                Status status = PlaceAutocomplete.getStatus(this, data);
+                Log.e("Error: Status = " ,status.toString());
+            } else if (resultCode == RESULT_CANCELED) {
+                // Indicates that the activity closed before a selection was made. For example if
+                // the user pressed the back button.
+            }
         }
     }
 
@@ -829,8 +882,27 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
     }
 
+    private static final int REQUEST_CODE_AUTOCOMPLETE = 1;
+    private void openAutocompleteActivity() {
+        try {
+            // The autocomplete activity requires Google Play Services to be available. The intent
+            // builder checks this and throws an exception if it is not the case.
+            Intent intent = new PlaceAutocomplete.IntentBuilder(PlaceAutocomplete.MODE_FULLSCREEN)
+                    .build(this);
+            startActivityForResult(intent, REQUEST_CODE_AUTOCOMPLETE);
+        } catch (GooglePlayServicesRepairableException e) {
+            // Indicates that Google Play Services is either not installed or not up to date. Prompt
+            // the user to correct the issue.
+            GoogleApiAvailability.getInstance().getErrorDialog(this, e.getConnectionStatusCode(),
+                    0 /* requestCode */).show();
+        } catch (GooglePlayServicesNotAvailableException e) {
+            // Indicates that Google Play Services is not available and the problem is not easily
+            // resolvable.
+            String message = "Google Play Services is not available: " +
+                    GoogleApiAvailability.getInstance().getErrorString(e.errorCode);
 
-
-
-
+            Log.e("Error message", message);
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+        }
+    }
 }
